@@ -1,0 +1,434 @@
+{
+  "paragraphs": [
+    {
+      "text": "val books \u003d spark.read.format(\"csv\")\n  .option(\"sep\", \",\")\n  .option(\"inferSchema\", \"true\")\n  .option(\"header\", \"true\")\n  .load(\"books.csv\")\n  \n val ratings \u003d spark.read.format(\"csv\")\n  .option(\"sep\", \",\")\n  .option(\"inferSchema\", \"true\")\n  .option(\"header\", \"true\")\n  .load(\"ratings.csv\")\n \n  val to_read \u003d spark.read.format(\"csv\")\n  .option(\"sep\", \",\")\n  .option(\"inferSchema\", \"true\")\n  .option(\"header\", \"true\")\n  .load(\"to_read.csv\")\n  \n\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-12-06 19:34:52.947",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "books: org.apache.spark.sql.DataFrame \u003d [id: int, book_id: int ... 21 more fields]\nratings: org.apache.spark.sql.DataFrame \u003d [book_id: int, user_id: int ... 1 more field]\nto_read: org.apache.spark.sql.DataFrame \u003d [user_id: int, book_id: int]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1607196117612_15619031",
+      "id": "20201205-192157_1080888608",
+      "dateCreated": "2020-12-05 19:21:57.612",
+      "dateStarted": "2020-12-06 19:34:53.017",
+      "dateFinished": "2020-12-06 19:35:23.105",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val new_books \u003d books.drop(\"ratings_1\").drop(\"ratings_2\").drop(\"ratings_3\").drop(\"ratings_4\").drop(\"ratings_5\").drop(\"image_url\").drop(\"small_image_url\").drop(\"work_id\").drop(\"best_book_id\").drop(\"work_id\").drop(\"isbn\")\n.drop(\"isbn13\").drop(\"average_rating\").drop(\"rating_count\").drop(\"work_ratings_count\").drop(\"work_text_reviews_count\").drop(\"ratings_count\")\n// new_books(\"original_publication_year\") \u003d new_books(\"original_publication_year\").ToInt()\n\nnew_books.orderBy(asc(\"original_publication_year\")).show(30)\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-12-06 19:34:59.439",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+----+--------+-----------+--------------------+-------------------------+--------------------+--------------------+-------------+\n|  id| book_id|books_count|             authors|original_publication_year|      original_title|               title|language_code|\n+----+--------+-----------+--------------------+-------------------------+--------------------+--------------------+-------------+\n|3506|  856917|          9|          Yuu Watase|                     null| 絶対彼氏 (Zettai Kar...|Absolute Boyfrien...|          eng|\n| 220| 3609760|         20|      Mark Cotta Vaz|                     null|Twilight: The Com...|Twilight: The Com...|        en-US|\n|4708| 9832370|          1|            BookRags|                     null|                null|BookRags Summary:...|          eng|\n|4771| 5171894|         50|       James Rollins|                     null|                null|The Doomsday Key ...|        en-US|\n|5610| 1044141|         68|    Stephen R. Covey|                     null|                null|The 8th Habit: Fr...|        en-US|\n| 976|   90072|          3|Robert Kapilow, D...|                     null|                null|Dr. Seuss\u0027s Green...|         null|\n|4878|17733861|         11|       Bella Forrest|                     null|                null|A Shade of Blood ...|          eng|\n|7646|  197436|          1|       Gloria Levine|                     null|                null|Ralph S. Mouse by...|         null|\n|8477|  351023|         44|         Jill Murphy|                     null|     The Worst Witch|The Worst Witch (...|         null|\n|9197|   11318|         56|    Raymond Chandler|                     null|Trouble Is My Bus...|Trouble Is My Bus...|          eng|\n|9511| 6054190|         35|          Jane Green|                     null|                null|           Dune Road|          eng|\n|9534| 1056627|         45|         Joel Osteen|                     null|                null|Become a Better Y...|         null|\n|9929| 6614886|          2|     أحمد خالد توفيق|                     null|                null|              زغازيغ|          ara|\n|5872| 9748274|         33|     Charles Dickens|                     null|                null|A Tale of Two Cit...|        en-US|\n|4229|      36|         12|Chris   Smith, Ch...|                     null|The Lord of the R...|The Lord of the R...|          eng|\n|6429|   48811|          4|       Carolyn Keene|                     null|Nancy Drew Comple...|   Nancy Drew: #1-64|          eng|\n|4248| 8724779|          1|P.C. Cast, Kristi...|                     null|                null|Marked / Betrayed...|          eng|\n|7191| 9528186|          1|  Lambert M. Surhone|                     null|                null|Pretty Little Lia...|          eng|\n|7216|  809849|         63|        Rod Campbell|                     null|                null|Dear Zoo: A Lift-...|         null|\n|4410|  349254|         10|         Jude Fisher|                     null|                null|The Lord of the R...|          eng|\n|7417|  765148|         49|Giles Andreae, Gu...|                     null|                null|Giraffes Can\u0027t Dance|        en-US|\n|2076|   19351|        266|Anonymous, N.K. S...|                  -1750.0|   Shūtur eli sharrī|The Epic of Gilga...|          eng|\n|2142|    1375|        255|Homer, Robert Fag...|                   -762.0|    Ἰλιάς ; Ὀδύσσεια|The Iliad/The Ody...|          eng|\n| 341|    1371|       1726|Homer, Robert Fag...|                   -750.0|               Ἰλιάς|           The Iliad|          eng|\n|6166|  534289|        140|Anonymous, Richar...|                   -750.0|              易 [Yì]|The I Ching or Bo...|          eng|\n|  79|    1381|       1703|Homer, Robert Fag...|                   -720.0|            Ὀδύσσεια|         The Odyssey|          eng|\n|1120|   21348|        942|Aesop, Laura Harr...|                   -560.0|            Aesopica|      Aesop\u0027s Fables|          eng|\n| 403|   10534|       1865|Sun Tzu, Thomas C...|                   -500.0| 孫子兵法 [Sūnzi bīngfǎ]|      The Art of War|          eng|\n|5637|  159964|        259|Anonymous, Ananda...|                   -500.0| धर्मपद [Dhammapada]|      The Dhammapada|          eng|\n|9679|  290882|        112|Anonymous, Juan M...|                   -500.0|   उपनिषद [Upaniṣad]|The Upanishads: T...|          eng|\n+----+--------+-----------+--------------------+-------------------------+--------------------+--------------------+-------------+\nonly showing top 30 rows\n\nnew_books: org.apache.spark.sql.DataFrame \u003d [id: int, book_id: int ... 6 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1607199583757_20045619",
+      "id": "20201205-201943_2012599832",
+      "dateCreated": "2020-12-05 20:19:43.757",
+      "dateStarted": "2020-12-06 19:34:59.536",
+      "dateFinished": "2020-12-06 19:35:24.696",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val filtr_books \u003d new_books.filter(\"language_code is not null and original_publication_year is not null\")\nval filtred_books \u003d filtr_books.withColumn(\"year\",filtr_books(\"original_publication_year\").cast(\"int\")).drop(\"original_publication_year\").withColumnRenamed(\"year\",\"original_publication_year\")\n\nfiltred_books.show()\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-12-06 19:35:06.011",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+--------+-----------+--------------------+--------------------+--------------------+-------------+-------------------------+\n| id| book_id|books_count|             authors|      original_title|               title|language_code|original_publication_year|\n+---+--------+-----------+--------------------+--------------------+--------------------+-------------+-------------------------+\n|  1| 2767052|        272|     Suzanne Collins|    The Hunger Games|The Hunger Games ...|          eng|                     2008|\n|  2|       3|        491|J.K. Rowling, Mar...|Harry Potter and ...|Harry Potter and ...|          eng|                     1997|\n|  3|   41865|        226|     Stephenie Meyer|            Twilight|Twilight (Twiligh...|        en-US|                     2005|\n|  4|    2657|        487|          Harper Lee|To Kill a Mocking...|To Kill a Mocking...|          eng|                     1960|\n|  5|    4671|       1356| F. Scott Fitzgerald|    The Great Gatsby|    The Great Gatsby|          eng|                     1925|\n|  6|11870085|        226|          John Green|The Fault in Our ...|The Fault in Our ...|          eng|                     2012|\n|  7|    5907|        969|      J.R.R. Tolkien|The Hobbit or The...|          The Hobbit|        en-US|                     1937|\n|  8|    5107|        360|       J.D. Salinger|The Catcher in th...|The Catcher in th...|          eng|                     1951|\n|  9|     960|        311|           Dan Brown|    Angels \u0026 Demons |Angels \u0026 Demons  ...|        en-CA|                     2000|\n| 10|    1885|       3455|         Jane Austen| Pride and Prejudice| Pride and Prejudice|          eng|                     1813|\n| 11|   77203|        283|     Khaled Hosseini|    The Kite Runner |     The Kite Runner|          eng|                     2003|\n| 12|13335037|        210|       Veronica Roth|           Divergent|Divergent (Diverg...|          eng|                     2011|\n| 13|    5470|        995|George Orwell, Er...|Nineteen Eighty-Four|                1984|          eng|                     1949|\n| 14|    7613|        896|       George Orwell|Animal Farm: A Fa...|         Animal Farm|          eng|                     1945|\n| 15|   48855|        710|Anne Frank, Elean...|Het Achterhuis: D...|The Diary of a Yo...|          eng|                     1947|\n| 16| 2429135|        274|Stieg Larsson, Re...|Män som hatar kvi...|The Girl with the...|          eng|                     2005|\n| 17| 6148028|        201|     Suzanne Collins|       Catching Fire|Catching Fire (Th...|          eng|                     2009|\n| 18|       5|        376|J.K. Rowling, Mar...|Harry Potter and ...|Harry Potter and ...|          eng|                     1999|\n| 19|      34|        566|      J.R.R. Tolkien| The Fellowship o...|The Fellowship of...|          eng|                     1954|\n| 20| 7260188|        239|     Suzanne Collins|          Mockingjay|Mockingjay (The H...|          eng|                     2010|\n+---+--------+-----------+--------------------+--------------------+--------------------+-------------+-------------------------+\nonly showing top 20 rows\n\nfiltr_books: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] \u003d [id: int, book_id: int ... 6 more fields]\nfiltred_books: org.apache.spark.sql.DataFrame \u003d [id: int, book_id: int ... 6 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1607199634415_2054537093",
+      "id": "20201205-202034_1141369799",
+      "dateCreated": "2020-12-05 20:20:34.416",
+      "dateStarted": "2020-12-06 19:35:23.675",
+      "dateFinished": "2020-12-06 19:35:25.686",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "// First aggregation from table ratings make average_ratings\nval average_rating \u003d ratings.groupBy(\"book_id\").agg(avg(\"rating\"))\naverage_rating.orderBy(asc(\"book_id\")).show",
+      "user": "anonymous",
+      "dateUpdated": "2020-12-06 19:35:09.065",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------+-----------+\n|book_id|avg(rating)|\n+-------+-----------+\n|      1|       4.24|\n|      2|       4.21|\n|      3|       3.09|\n|      4|       4.46|\n|      5|       3.89|\n|      6|       4.09|\n|      7|       3.92|\n|      8|       3.83|\n|      9|       3.35|\n|     10|       4.18|\n|     11|       4.24|\n|     12|       3.79|\n|     13|       4.15|\n|     14|       3.86|\n|     15|       4.23|\n|     16|       3.98|\n|     17|       3.97|\n|     18|       4.16|\n|     19|       4.14|\n|     20|       3.71|\n+-------+-----------+\nonly showing top 20 rows\n\naverage_rating: org.apache.spark.sql.DataFrame \u003d [book_id: int, avg(rating): double]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1607207187612_-207231596",
+      "id": "20201205-222627_1723321767",
+      "dateCreated": "2020-12-05 22:26:27.617",
+      "dateStarted": "2020-12-06 19:35:25.283",
+      "dateFinished": "2020-12-06 19:35:28.493",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "// second aggrigation, join books and average ratings then count average rating by author\n\nval books_with_rating \u003d filtred_books.join(average_rating, filtred_books(\"book_id\") \u003d\u003d\u003d average_rating(\"book_id\")).withColumnRenamed(\"avg(rating)\",\"rating\")\n\nval rating_of_autors \u003d books_with_rating.groupBy(\"authors\").agg(avg(\"rating\"))\n\nrating_of_autors.orderBy(desc(\"avg(rating)\")).show()\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-12-06 19:35:11.842",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------------------+-----------------+\n|             authors|      avg(rating)|\n+--------------------+-----------------+\n|Dave Barry, Ridle...|4.557142857142857|\n|         Howard Zinn|             4.54|\n|     Francine Rivers| 4.46067415730337|\n|           Loung Ung|             4.45|\n|Mark Twain, John ...|             4.44|\n|Thomas J. Stanley...|             4.44|\n|Graham Greene, Ro...|             4.43|\n|         John Scalzi|             4.41|\n|    Frank E. Peretti|4.404040404040404|\n|    Jerome K. Jerome|              4.4|\n|         Dave Pelzer|              4.4|\n|Åsne Seierstad, I...|4.391891891891892|\n|H.G. Wells, Arthu...|             4.39|\n|     Stephen Hawking|             4.38|\n|Hiromu Arakawa, A...|             4.38|\n|           John Gray|             4.37|\n|Gabriel García Má...|             4.37|\n|Mark Waid, Alfred...|4.347368421052631|\n|Dava Sobel, Neil ...|             4.34|\n|Kōbō Abe, E. Dale...|4.326315789473684|\n+--------------------+-----------------+\nonly showing top 20 rows\n\nbooks_with_rating: org.apache.spark.sql.DataFrame \u003d [id: int, book_id: int ... 8 more fields]\nrating_of_autors: org.apache.spark.sql.DataFrame \u003d [authors: string, avg(rating): double]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1607210029285_1005263155",
+      "id": "20201205-231349_540855122",
+      "dateCreated": "2020-12-05 23:13:49.289",
+      "dateStarted": "2020-12-06 19:35:25.761",
+      "dateFinished": "2020-12-06 19:35:32.131",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "// third agregation \nval count_to_read \u003d to_read.groupBy(\"book_id\").agg(count(\"*\"))\n\nval books_with_to_read \u003d filtred_books.join(count_to_read, filtred_books(\"book_id\") \u003d\u003d\u003d count_to_read(\"book_id\"))\n\nval popular_year \u003d books_with_to_read.groupBy(\"original_publication_year\").agg(sum(\"count(1)\")).withColumnRenamed(\"sum(count(1))\",\"count_to_read\")\n\npopular_year.orderBy(asc(\"count_to_read\")).show()\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-12-06 19:35:15.180",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------------------------+-------------+\n|original_publication_year|count_to_read|\n+-------------------------+-------------+\n|                     1308|            1|\n|                     1390|            3|\n|                     1807|           11|\n|                     1872|           11|\n|                     1902|           11|\n|                     1605|           15|\n|                     1815|           15|\n|                     1915|           16|\n|                     1847|           17|\n|                     2009|           18|\n|                     1726|           20|\n|                     1945|           21|\n|                     1819|           21|\n|                     1854|           22|\n|                     1884|           22|\n|                     1916|           22|\n|                     1866|           22|\n|                     1889|           24|\n|                     1949|           26|\n|                     1729|           29|\n+-------------------------+-------------+\nonly showing top 20 rows\n\ncount_to_read: org.apache.spark.sql.DataFrame \u003d [book_id: int, count(1): bigint]\nbooks_with_to_read: org.apache.spark.sql.DataFrame \u003d [id: int, book_id: int ... 8 more fields]\npopular_year: org.apache.spark.sql.DataFrame \u003d [original_publication_year: int, count_to_read: bigint]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1607210924467_-2055572145",
+      "id": "20201205-232844_1659426143",
+      "dateCreated": "2020-12-05 23:28:44.467",
+      "dateStarted": "2020-12-06 19:35:29.042",
+      "dateFinished": "2020-12-06 19:35:36.374",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "// Save file\n\npopular_year.coalesce(1).write.format(\"csv\")\n  .option(\"sep\", \",\")\n  .option(\"header\", \"true\")\n  .save(\"popular_year2\")\n  \n rating_of_autors.coalesce(1).write.format(\"csv\")\n  .option(\"sep\", \",\")\n  .option(\"header\", \"true\")\n  .save(\"rating_of_autors2\")\n  \n",
+      "user": "anonymous",
+      "dateUpdated": "2020-12-06 01:58:30.769",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1607211817506_-336761064",
+      "id": "20201205-234337_1258486535",
+      "dateCreated": "2020-12-05 23:43:37.512",
+      "dateStarted": "2020-12-06 01:58:30.810",
+      "dateFinished": "2020-12-06 01:58:35.167",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "  filtred_books.coalesce(1).write.format(\"csv\")\n  .option(\"sep\", \",\")\n  .option(\"header\", \"true\")\n  .save(\"new_books2\")",
+      "user": "anonymous",
+      "dateUpdated": "2020-12-06 01:58:56.971",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": []
+      },
+      "apps": [],
+      "jobName": "paragraph_1607213116191_1552314037",
+      "id": "20201206-000516_1569259586",
+      "dateCreated": "2020-12-06 00:05:16.192",
+      "dateStarted": "2020-12-06 01:58:57.005",
+      "dateFinished": "2020-12-06 01:58:57.452",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "count_to_read.withColumnRenamed(\"count(1)\", \"users_want_to_read\").show(5)\n",
+      "user": "anonymous",
+      "dateUpdated": "2020-12-06 19:37:25.166",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------+------------------+\n|book_id|users_want_to_read|\n+-------+------------------+\n|   1645|                97|\n|   1591|                95|\n|   1238|               289|\n|    471|               375|\n|   7754|                71|\n+-------+------------------+\nonly showing top 5 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1607283276870_847140861",
+      "id": "20201206-193436_1059705155",
+      "dateCreated": "2020-12-06 19:34:36.870",
+      "dateStarted": "2020-12-06 19:37:25.226",
+      "dateFinished": "2020-12-06 19:37:26.342",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "new_books.withColumnRenamed(\"books_count\", \"count_of_edition\").show(5)",
+      "user": "anonymous",
+      "dateUpdated": "2020-12-06 19:39:18.792",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+-------+----------------+--------------------+-------------------------+--------------------+--------------------+-------------+\n| id|book_id|count_of_edition|             authors|original_publication_year|      original_title|               title|language_code|\n+---+-------+----------------+--------------------+-------------------------+--------------------+--------------------+-------------+\n|  1|2767052|             272|     Suzanne Collins|                   2008.0|    The Hunger Games|The Hunger Games ...|          eng|\n|  2|      3|             491|J.K. Rowling, Mar...|                   1997.0|Harry Potter and ...|Harry Potter and ...|          eng|\n|  3|  41865|             226|     Stephenie Meyer|                   2005.0|            Twilight|Twilight (Twiligh...|        en-US|\n|  4|   2657|             487|          Harper Lee|                   1960.0|To Kill a Mocking...|To Kill a Mocking...|          eng|\n|  5|   4671|            1356| F. Scott Fitzgerald|                   1925.0|    The Great Gatsby|    The Great Gatsby|          eng|\n+---+-------+----------------+--------------------+-------------------------+--------------------+--------------------+-------------+\nonly showing top 5 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1607283334468_-842068774",
+      "id": "20201206-193534_1094324385",
+      "dateCreated": "2020-12-06 19:35:34.468",
+      "dateStarted": "2020-12-06 19:39:18.812",
+      "dateFinished": "2020-12-06 19:39:19.172",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "ratings.show(5)",
+      "user": "anonymous",
+      "dateUpdated": "2020-12-06 19:39:57.658",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------+-------+------+\n|book_id|user_id|rating|\n+-------+-------+------+\n|      1|    314|     5|\n|      1|    439|     3|\n|      1|    588|     5|\n|      1|   1169|     4|\n|      1|   1185|     4|\n+-------+-------+------+\nonly showing top 5 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1607283506804_1678966970",
+      "id": "20201206-193826_1378472317",
+      "dateCreated": "2020-12-06 19:38:26.804",
+      "dateStarted": "2020-12-06 19:39:57.703",
+      "dateFinished": "2020-12-06 19:39:57.974",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "user": "anonymous",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1607283597658_-2098655936",
+      "id": "20201206-193957_841972992",
+      "dateCreated": "2020-12-06 19:39:57.658",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "semestralka",
+  "id": "2FSZ16THV",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

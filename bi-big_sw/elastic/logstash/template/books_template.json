@@ -1,0 +1,32 @@
+{
+  "index_patterns": "books",
+  "settings": {
+    "index.refresh_interval": "5s"
+  },
+  "mappings": {
+    "doc": {
+      "dynamic_templates": [
+        {
+          "string_fields": {
+            "mapping": {
+              "type": "text",
+              "omit_norms": true,
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "match_mapping_type": "string",
+            "match": "*"
+          }
+        }
+      ],
+      "properties": {}
+    }
+  },
+  "aliases": {}
+}
+
+
