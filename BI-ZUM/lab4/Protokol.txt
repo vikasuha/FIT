@@ -1,0 +1,9 @@
+1. Reprodukce obrázků
+2. Genetic Algorithm
+3. Používající genetické algoritmus můj program z náhodně vygenerovaného obrázku
+   zkusí se vytvořit podobný danému. Čím víc opakování projde tím podobnější bude obrázek,
+   s tou pravděpodobností mutace je situaci složitější, protože čím větší jí nastavit tím 
+   nepředvídatelně se bude vést algoritmus. Je-li udělat ho větším, v většině případů je výsledek
+   horší, a obrázek se stává více rozmazaný. Program má takovou vadu že pracuje docela dlouho,
+   protože musí provést hodně iterace. Aby obrázek byl podobný danému, program musí provést přibližně
+   15-25 tisíc operace.
